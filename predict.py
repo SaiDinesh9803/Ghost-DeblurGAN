@@ -15,7 +15,7 @@ from models.networks import get_generator
 
 class Predictor:
     def __init__(self, weights_path: str, model_name: str = '', cuda: bool = True):
-        with open('config/config.yaml') as cfg:
+        with open('/home/sai/NN/Ghost-DeblurGAN/config/config.yaml') as cfg:
             config = yaml.load(cfg)
         model = get_generator(model_name or config['model'], cuda= cuda)
         model.load_state_dict(torch.load(weights_path)['model']) if weights_path is not None else None
@@ -94,7 +94,7 @@ def main(img_pattern: str,
          weights_path='best_fpn.h5',
          out_dir='submit/',
          side_by_side: bool = False,
-         video: bool = False, cuda: bool= True):
+         video: bool = True, cuda: bool= True):
     def sorted_glob(pattern):
         return sorted(glob(pattern))
 
